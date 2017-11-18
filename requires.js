@@ -1,0 +1,1 @@
+window.blockstack = require('blockstack')

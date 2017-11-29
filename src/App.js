@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './App.css';
 
+import UserInfo from './UserInfo';
+
 const blockstack = require('blockstack');
 
 class App extends Component {
@@ -59,6 +61,7 @@ class App extends Component {
           </button>
         </p>
         <p style={{display: !this.state.isSignedIn ? 'none' : 'block' }}>
+          <UserInfo user={this.state.person} />
           <button onClick={this.handleSignOut}>
             Sign-out
           </button>

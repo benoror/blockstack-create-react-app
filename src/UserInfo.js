@@ -5,18 +5,13 @@ import './UserInfo.css';
 class UserInfo extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      name: this.props.user && this.props.user.name() || 'Nameless',
-      avatarUrl: this.props.user && this.props.user.avatarUrl() || undefined
-    }
   }
 
   render() {
     return (
       <div className="UserInfo">
-        <img class="avatar" src={this.state.avatarUrl} />
-        <h1>{this.state.name}</h1>
+        <img class="avatar" src={this.props.user && this.props.user.image[0].contentUrl} />
+        <h1>{this.props.user && this.props.user.name}</h1>
       </div>
     )
   }

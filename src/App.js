@@ -14,7 +14,11 @@ class App extends Component {
 
     this.state = {
       isSignedIn,
-      person: isSignedIn && this.loadPerson()
+      person: undefined
+    }
+
+    if(isSignedIn) {
+      this.loadPerson();
     }
 
     this.handleSignIn = this.handleSignIn.bind(this)
@@ -23,7 +27,6 @@ class App extends Component {
 
   checkSignedInStatus() {
     if (blockstack.isUserSignedIn()) {
-      // showProfile(profile)
       return true;
     } else if (blockstack.isSignInPending()) {
       blockstack.handlePendingSignIn().then(function(userData) {
@@ -34,9 +37,11 @@ class App extends Component {
   }
 
   loadPerson() {
-    let profile = blockstack.loadUserData().profile
+    let username = blockstack.loadUserData().username
 
-    return new blockstack.Person(profile)
+    blockstack.lookupProfile(username).then((person) => {
+      this.setState({ person })
+    })
   }
 
   handleSignIn(event) {
